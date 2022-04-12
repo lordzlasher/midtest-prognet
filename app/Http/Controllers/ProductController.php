@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Products;
 use App\Models\Categories;
 
@@ -96,6 +97,9 @@ class ProductController extends Controller
         ]);
         
         if($request->file('photo')) {
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
             $validatedData['photo'] = $request->file('photo')->store('photo');
         }
 
@@ -112,7 +116,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Products::where('id',$id)->delete();
+        $product = Products::find($id);
+        
+        if($product->photo){
+            Storage::delete($product->photo);
+        }
+
+        $product->delete();
         return redirect('/product')->with('success','Data product telah dihapus');
     }
 }

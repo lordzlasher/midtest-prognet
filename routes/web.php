@@ -22,9 +22,6 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::resource('/movie', MovieController::class);
-Route::get('/movie/{id}/delete',[MovieController::class,'destroy']);
-
 Route::resource('/category', CategoryController::class);
 Route::get('/category/{id}/delete',[CategoryController::class,'destroy']);
 
