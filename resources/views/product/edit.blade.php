@@ -71,6 +71,7 @@ Product Edit
                             </div>
                         </div>
                         <div class="form-group">
+                            <input type="hidden" name="oldImage" value="{{$product->photo}}">
                             <label class="col-md-12">Poster</label>
                                 <input class="form-control form-control-lg @error('photo') is-invalid @enderror" id="photo" name="photo" type="file" onchange="previewImage(event)">
                                 @error('photo')

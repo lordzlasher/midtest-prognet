@@ -51,8 +51,8 @@ Product Detail
                             <label for="year" class="col-md-12">Category</label>
                             <div class="col-md-12">
                                 <input type="text" value={{$product->categories->name}}
-                                    class="form-control form-control-line" name="year"
-                                    id="year" readonly>
+                                    class="form-control form-control-line" name="category"
+                                    id="category" readonly>
                             </div>
                         </div>
                         <div class="form-group">
