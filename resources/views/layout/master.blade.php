@@ -11,7 +11,7 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>@yield('title')| Cinema</title>
+    <title>@yield('title')| Midtest Prognet</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
@@ -99,14 +99,14 @@
                                 href="{{ url('/') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ url('/user') }}" aria-expanded="false"><i
-                                    class="mdi mdi-face"></i><span class="hide-menu">User</span></a></li>
+                                href="{{ url('/product') }}" aria-expanded="false"><i
+                                    class="mdi mdi-gift"></i><span class="hide-menu">Product</span></a></li>
                         <li class="sidebar-item {{ (request()->is('/movie*')) ? 'active' : '' }}"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ url('/movie') }}" aria-expanded="false"><i class="mdi mdi-movie"></i><span
-                                    class="hide-menu">Movie</span></a></li>
+                                href="{{ url('/category') }}" aria-expanded="false"><i class="mdi mdi-wrench"></i><span
+                                    class="hide-menu">Category</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ url('/ticket') }}" aria-expanded="false"><i class="mdi mdi-ticket"></i><span
-                                    class="hide-menu">Ticket</span></a></li>
+                                href="{{ url('/package') }}" aria-expanded="false"><i class="mdi mdi-package"></i><span
+                                    class="hide-menu">Package</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

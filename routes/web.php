@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +24,13 @@ Route::get('/', function () {
 
 Route::resource('/movie', MovieController::class);
 Route::get('/movie/{id}/delete',[MovieController::class,'destroy']);
+
+Route::resource('/category', CategoryController::class);
+Route::get('/category/{id}/delete',[CategoryController::class,'destroy']);
+
+Route::resource('/product', ProductController::class);
+Route::get('/product/{id}/delete',[ProductController::class,'destroy']);
+
+
 
 
