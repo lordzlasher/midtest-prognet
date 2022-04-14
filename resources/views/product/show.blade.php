@@ -26,7 +26,7 @@ Product Detail
                             class="" width="250"/>
                         <hr>
                         <h4 class="card-title m-t-10">{{$product->name}}</h4>
-                        <h6 class="card-subtitle">{{$product->categories->name}}</h6>
+                        <h6 class="card-subtitle">{{$product->publisher}}</h6>
                     </center>
                 </div>
                 <div>
@@ -53,6 +53,27 @@ Product Detail
                                 <input type="text" value={{$product->categories->name}}
                                     class="form-control form-control-line" name="category"
                                     id="category" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Release Year</label>
+                            <div class="col-md-12">
+                                <input type="text" value="{{$product->year}}"
+                                    class="form-control form-control-line" id="year" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Developer</label>
+                            <div class="col-md-12">
+                                <input type="text" value="{{$product->developer}}"
+                                    class="form-control form-control-line" id="developer" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Publisher</label>
+                            <div class="col-md-12">
+                                <input type="text" value="{{$product->publisher}}"
+                                    class="form-control form-control-line" id="publisher" readonly>
                             </div>
                         </div>
                         <div class="form-group">

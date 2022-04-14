@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-
-
+use App\Http\Controllers\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +26,12 @@ Route::get('/category/{id}/delete',[CategoryController::class,'destroy']);
 
 Route::resource('/product', ProductController::class);
 Route::get('/product/{id}/delete',[ProductController::class,'destroy']);
+
+Route::resource('/package', PackageController::class);
+Route::get('/package/{id}/delete',[PackageController::class,'destroy']);
+Route::get('/package/{id}/deleteproduct',[PackageController::class,'destroyProducts']);
+
+
 
 
 

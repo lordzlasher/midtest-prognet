@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('detail_packages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_package')->constrained('packages');
+            $table->foreignId('packages_id')->constrained('packages');
             $table->foreignId('id_product')->constrained('products');
             $table->integer('quantity');
             $table->timestamps();

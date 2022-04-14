@@ -22,7 +22,7 @@ Product Edit
                         <img id="poster_preview" src="{{asset('storage/'.$product->photo)}}" width="250"  />
                         <hr>
                         <h4 id="title" class="card-title m-t-10">{{$product->name}}</h4>
-                        <h6 id="year_preview" class="card-subtitle">{{$product->categories->name}}</h6>
+                        <h6 id="publisher_preview" class="card-subtitle">{{$product->publisher}}</h6>
                     </center>
                 </div>
                 <div>
@@ -39,7 +39,7 @@ Product Edit
                 <div class="card-body">
                     <form class="form-horizontal form-material mx-2" method="post" enctype="multipart/form-data" action="{{ route('product.update', $product) }}">
                         @csrf
-                        @method('put')>
+                        @method('put')
                         <div class="form-group">
                             <label class="col-md-12">Game Title</label>
                             <div class="col-md-12">
@@ -68,6 +68,39 @@ Product Edit
                                         {{ $message }}
                                     </div>
                                     @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Year Release</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line @error('year') is-invalid @enderror" id="year" name="year" value="{{$product->year}}">
+                                @error('year')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Developer</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line @error('developer') is-invalid @enderror" id="developer" name="developer" value="{{$product->developer}}">
+                                @error('developer')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Publisher</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-line @error('publisher') is-invalid @enderror" id="publisher" name="publisher" value="{{$product->publisher}}">
+                                @error('publisher')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">
@@ -108,9 +141,9 @@ Product Edit
         document.getElementById("title").innerHTML = x;
     }
 
-         function previewCategory() {
-        var x = document.getElementById("id_category").value;
-        document.getElementById("category_preview").innerHTML = x;
+         function previewPublisher() {
+        var x = document.getElementById("publisher").value;
+        document.getElementById("publisher_preview").innerHTML = x;
     }
 
         </script>

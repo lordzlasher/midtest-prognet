@@ -15,7 +15,7 @@ Product Master
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-product"></i> Table Product</h6>
+            <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-gift"></i>Table Product</h6>
                     <div class="text-end upgrade-btn">
                         <a href="{{url('/product/create')}}" class="btn btn-primary text-white tect">Add Product</a>
                     </div>
@@ -25,6 +25,8 @@ Product Master
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Product Name</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Year</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -33,6 +35,8 @@ Product Master
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{ $product->name }}</td>
+                            <td>{{ $product->publisher }}</td>
+                            <td>{{ $product->year }}</td>
                             <td>
                                 <a href="{{ url('product/' . $product->id) }}"
                                     class="btn btn-info btn-sm"><i class="mdi mdi-eye"></i></a>

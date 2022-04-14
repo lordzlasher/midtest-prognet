@@ -1,14 +1,14 @@
 @extends('layout.master')
 
 @section('title')
-Add Product
+Add Package
 @endsection
 
 @section('content')
 
 @component('components.breadcrumb')
         @slot('breadcrumb_title')
-            Add Product
+            Add Package
         @endslot
 @endcomponent
 
@@ -22,8 +22,9 @@ Add Product
                     <center class="m-t-30">
                         <img id="poster_preview" class="img-fluid" width="250" src="../assets/images/poster/poster_preview.png"/>
                         <hr>
-                        <h4 id="title" class="card-title m-t-10">Game Title</h4>
-                        <h6 id="publisher_preview" class="card-subtitle">Publisher</h6>
+                        <h4 id="title" class="card-title m-t-10">Package</h4>
+                        <h6 class="card-subtitle" id="normal_price_preview"><s>Normal Price</s></h6>
+                        <h3 class="card-subtitle"id="end_price_preview">End Price</h3>
                     </center>
                 </div>
                 <div>
@@ -36,10 +37,10 @@ Add Product
         <div class="col-lg-8 col-xlg-9 col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <form class="form-horizontal form-material mx-2" method="post" enctype="multipart/form-data" action="{{ route('product.store') }}">
+                    <form class="form-horizontal form-material mx-2" method="post" enctype="multipart/form-data" action="{{ route('package.store') }}">
                         @csrf 
                         <div class="form-group">
-                            <label class="col-md-12">Game Title</label>
+                            <label class="col-md-12">Package Name</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control form-control-line @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" onchange="previewTitle()">
                                 @error('name')
@@ -50,27 +51,21 @@ Add Product
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Category</label>
+                            <label class="col-md-12">Products</label>
                             <div class="col-md-12">
-                                <select
-                                    class="form-select form-select-line  @error('id_category') is-invalid @enderror" id="id_category" name="id_category" value="{{ old('id_category') }}" onchange="previewCategory()">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}
-                                    </option>
-                                @endforeach
+                                {{-- <select class="form-select form-select-line" id="product" name="products[]" multiple> --}}
+                                    <select name="products[]" multiple class="form-select form-select-line" id="product">
+                                    @foreach ($products as $product)
+                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                     @endforeach
                                 </select>
-                                    @error('id_category')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Release Year</label>
+                            <label class="col-md-12">Quantity</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control form-control-line @error('year') is-invalid @enderror" id="year" name="year" value="{{ old('year') }}">
-                                @error('year')
+                                <input type="text" class="form-control form-control-line @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}">
+                                @error('quantity')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -78,10 +73,10 @@ Add Product
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Developer</label>
+                            <label class="col-md-12">Normal Price</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control form-control-line @error('developer') is-invalid @enderror" id="developer" name="developer" value="{{ old('developer') }}">
-                                @error('developer')
+                                <input type="text" class="form-control form-control-line @error('normal_price') is-invalid @enderror" id="normal_price" name="normal_price" value="{{ old('normal_price') }}" onchange="previewNormalPrice()">
+                                @error('normal_price')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -89,10 +84,10 @@ Add Product
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Publisher</label>
+                            <label class="col-md-12">End Price</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control form-control-line @error('publisher') is-invalid @enderror" id="publisher" name="publisher" value="{{ old('publisher') }}" onchange="previewPublisher()">
-                                @error('publisher')
+                                <input type="text" class="form-control form-control-line @error('end_price') is-invalid @enderror" id="end_price" name="end_price" value="{{ old('end_price') }}" onchange="previewEndPrice()">
+                                @error('end_price')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -110,7 +105,7 @@ Add Product
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <button class="btn btn-success text-white">Add Product</button>
+                                <button class="btn btn-success text-white">Add Package</button>
                             </div>
                         </div>
                     </form>
@@ -121,8 +116,15 @@ Add Product
     </div>
     <!-- Row -->
 
-<script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type='text/javascript'>
+   $(document).ready(function() {
+    $('#product').select2();
+});
+</script>
 
+<script>
 var previewImage = function(event) {
     var output = document.getElementById('poster_preview');
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -131,16 +133,27 @@ var previewImage = function(event) {
     }
   };
 
+  const rupiah = (number)=>{
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    }).format(number);
+  }
+
   function previewTitle() {
         var x = document.getElementById("name").value;
         document.getElementById("title").innerHTML = x;
     }
 
-    function previewPublisher() {
-        var x = document.getElementById("publisher").value;
-        document.getElementById("publisher_preview").innerHTML = x;
+    function previewNormalPrice() {
+        var x = document.getElementById("normal_price").value;
+        document.getElementById("normal_price_preview").innerHTML = rupiah(x);
     }
 
+    function previewEndPrice() {
+        var y = document.getElementById("end_price").value;
+        document.getElementById("end_price_preview").innerHTML = rupiah(y);
+    }
 </script>
 
 @endsection

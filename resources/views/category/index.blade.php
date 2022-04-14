@@ -15,7 +15,7 @@ Category Master
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-category"></i>Table Categories</h6>
+            <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-wrench"></i>Table Categories</h6>
                     <div class="text-end upgrade-btn">
                         <a href="{{url('/category/create')}}" class="btn btn-primary text-white tect">Add Category</a>
                     </div>
@@ -33,7 +33,7 @@ Category Master
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{ $category->name }}</td>
-=                            <td>
+                           <td>
                                 <a href="{{ url('category/' . $category->id) }}"
                                     class="btn btn-info btn-sm"><i class="mdi mdi-eye"></i></a>
                                 <a href="{{ url('category/' . $category->id . '/edit') }}"

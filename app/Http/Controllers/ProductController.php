@@ -42,8 +42,10 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'id_category' => 'required',
+            'year' => 'required|numeric',
+            'developer' => 'required|',
+            'publisher' => 'required|',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
         ]);
         
         if($request->file('photo')) {
@@ -93,6 +95,9 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'id_category' => 'required',
+            'year' => 'required|numeric',
+            'developer' => 'required|',
+            'publisher' => 'required|',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         
