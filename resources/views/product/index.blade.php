@@ -16,11 +16,16 @@ Product Master
     <div class="card">
         <div class="card-body">
             <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-gift"></i>Table Product</h6>
+            <a href="{{ url('product/') }}"
+                class="btn btn-sm"><i class="mdi mdi-format-list-bulleted"></i></a>
+            <a href="{{ url('product-grid') }}"
+                class="btn btn-sm"><i class="mdi mdi-grid"></i></a>
                     <div class="text-end upgrade-btn">
                         <a href="{{url('/product/create')}}" class="btn btn-primary text-white tect">Add Product</a>
                     </div>
+            <br>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="dataTable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -54,6 +59,14 @@ Product Master
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
 
 @endsection
 

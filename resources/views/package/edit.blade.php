@@ -23,7 +23,7 @@ Packages Edit
             <div class="card">
                 <div class="card-body">
                     <center> <h5 id="preview" class="card-title center">Package</h5></center>
-                    <center class="m-t-30"> <img src="{{asset('storage/'.$packages->photo)}}" class="" width="250"/>
+                    <center class="m-t-30"> <img id="poster_preview" src="{{asset('storage/'.$packages->photo)}}" class="" width="250"/>
                         <hr>
                         <h4 class="card-title m-t-10" id="name_preview">{{$packages->name}}</h4>
                         <h6 class="card-subtitle text-danger" id="normal_price_preview"><s>{{$packages->normal_price}}</s></h6>
@@ -138,9 +138,6 @@ Packages Edit
                         <h4 class="card-title m-t-10"><a href="{{ url('product/' . $package->products->id) }}">{{$package->products->name}}</a></h4>
                         <h6 class="card-subtitle">{{$package->products->publisher}}</h6>
                         <h6 class="card-subtitle">{{$package->quantity}} pcs</h6>
-                        {{-- <form class="form-horizontal form-material mx-2" method="post" action="{{ route('package/{id_product}/deleteproduct', $package->id_product) }}">
-                            @csrf
-                            @method('delete') --}}
                             <a onclick="return confirm('Apakah anda yakin untuk menghapus data product pada package?')"
                         href="{{ url('package/' . $package->id . '/deleteproduct') }}"
                         class="btn btn-danger btn-sm"><i class="mdi mdi-delete"></i></a>

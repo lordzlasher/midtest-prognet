@@ -23,6 +23,12 @@ class PackageController extends Controller
         return view('package.index',['packages'=>DB::table('packages')->paginate(8)]);
     }
 
+    public function index_list()
+    {
+        $packages = Packages::all();
+        return view('package.index_list',compact('packages'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -25,9 +25,11 @@ Route::resource('/category', CategoryController::class);
 Route::get('/category/{id}/delete',[CategoryController::class,'destroy']);
 
 Route::resource('/product', ProductController::class);
+Route::get('/product-grid',[ProductController::class,'index_grid']);
 Route::get('/product/{id}/delete',[ProductController::class,'destroy']);
 
 Route::resource('/package', PackageController::class);
+Route::get('/package-list',[PackageController::class,'index_list']);
 Route::get('/package/{id}/delete',[PackageController::class,'destroy']);
 Route::get('/package/{id}/deleteproduct',[PackageController::class,'destroyProducts']);
 

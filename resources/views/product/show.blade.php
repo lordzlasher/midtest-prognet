@@ -78,7 +78,7 @@ Product Detail
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <a href="{{url('/product')}}" class="btn btn-primary text-white tect">Back</a>
+                                <a href="javascript:history.back()" class="btn btn-primary text-white tect">Back</a>
                             </div>
                         </div>
                     </form>

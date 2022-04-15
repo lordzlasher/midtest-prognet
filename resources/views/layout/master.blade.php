@@ -14,7 +14,7 @@
     <title>@yield('title')| Midtest Prognet</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/logo.png')}}">
     <!-- Custom CSS -->
     <link href="{{asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
@@ -22,6 +22,8 @@
     <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet">
      <!-- Custom CSS Select2 -->
      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -77,7 +79,7 @@
                         <li class="sidebar-item {{ (request()->is('/')) ? 'active' : '' }}" > <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{ url('/') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        <li class="sidebar-item" {{ (request()->is('/product')) ? 'active' : '' }}> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{ url('/product') }}" aria-expanded="false"><i
                                     class="mdi mdi-gift"></i><span class="hide-menu">Product</span></a></li>
                         <li class="sidebar-item {{ (request()->is('/movie*')) ? 'active' : '' }}"> <a class="sidebar-link waves-effect waves-dark sidebar-link"

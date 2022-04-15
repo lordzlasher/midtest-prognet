@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Products;
 use App\Models\Categories;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -18,6 +20,12 @@ class ProductController extends Controller
     {
         $products = Products::all();
         return view('product.index',compact('products'));
+    }
+
+    public function index_grid()
+    {
+        $products = Products::all();
+        return view('product.index_grid',['products'=>DB::table('products')->paginate(8)]);
     }
 
     /**

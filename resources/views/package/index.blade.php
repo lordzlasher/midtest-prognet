@@ -17,6 +17,10 @@ Package Master
         <div class="card-body">
             <div>
             <h6 class="card-title"> <i class="m-r-5 font-18 mdi mdi-package"></i> Table Packages</h6>
+            <a href="{{ url('package-list') }}"
+            class="btn btn-sm"><i class="mdi mdi-format-list-bulleted"></i></a>
+            <a href="{{ url('package') }}"
+            class="btn btn-sm"><i class="mdi mdi-grid"></i></a>
                     <div class="text-end upgrade-btn">
                         <a href="{{url('/package/create')}}" class="btn btn-primary text-white tect">Add Package</a>
                     </div>
