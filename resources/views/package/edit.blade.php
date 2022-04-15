@@ -6,13 +6,6 @@ Packages Edit
 
 @section('content')
 
-<div class="container-fluid">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-            <strong>{{ $message }}</strong>
-    </div>
-    @endif
-
 @component('components.breadcrumb')
         @slot('breadcrumb_title')
             Packages Edit
@@ -30,8 +23,7 @@ Packages Edit
             <div class="card">
                 <div class="card-body">
                     <center> <h5 id="preview" class="card-title center">Package</h5></center>
-                    <center class="m-t-30"> <img src="{{asset('storage/'.$packages->photo)}}"
-                            class="" width="250"/>
+                    <center class="m-t-30"> <img src="{{asset('storage/'.$packages->photo)}}" class="" width="250"/>
                         <hr>
                         <h4 class="card-title m-t-10" id="name_preview">{{$packages->name}}</h4>
                         <h6 class="card-subtitle text-danger" id="normal_price_preview"><s>{{$packages->normal_price}}</s></h6>
@@ -48,7 +40,9 @@ Packages Edit
         <div class="col-lg-8 col-xlg-9 col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <form class="form-horizontal form-material mx-2">
+                    <form class="form-horizontal form-material mx-2" method="post" enctype="multipart/form-data" action="{{ route('package.update', $packages) }}">
+                        @csrf
+                        @method('put')
                        <div class="form-group">
                             <label class="col-md-12">Package Name</label>
                             <div class="col-md-12">
@@ -63,7 +57,6 @@ Packages Edit
                         <div class="form-group">
                             <label class="col-md-12">Products</label>
                             <div class="col-md-12">
-                                {{-- <select class="form-select form-select-line" id="product" name="products[]" multiple> --}}
                                     <select name="products[]" multiple class="form-select form-select-line" id="product">
                                     @foreach ($products as $product)
                                          <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -105,8 +98,17 @@ Packages Edit
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-12">Poster</label>
+                                <input class="form-control form-control-lg @error('photo') is-invalid @enderror" id="photo" name="photo" type="file" onchange="previewImage(event)">
+                                @error('photo')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-12">
-                                <a href="{{url('/package')}}" class="btn btn-primary text-white tect">Back</a>
+                                <button class="btn btn-success text-white">Update Package</button>
                             </div>
                         </div>
                     </form>
@@ -136,9 +138,13 @@ Packages Edit
                         <h4 class="card-title m-t-10"><a href="{{ url('product/' . $package->products->id) }}">{{$package->products->name}}</a></h4>
                         <h6 class="card-subtitle">{{$package->products->publisher}}</h6>
                         <h6 class="card-subtitle">{{$package->quantity}} pcs</h6>
-                        <a onclick="return confirm('Apakah anda yakin untuk menghapus data product pada package?')"
-                        href="{{ url('package/' . $package->packages_id . '/deleteproduct') }}"
+                        {{-- <form class="form-horizontal form-material mx-2" method="post" action="{{ route('package/{id_product}/deleteproduct', $package->id_product) }}">
+                            @csrf
+                            @method('delete') --}}
+                            <a onclick="return confirm('Apakah anda yakin untuk menghapus data product pada package?')"
+                        href="{{ url('package/' . $package->id . '/deleteproduct') }}"
                         class="btn btn-danger btn-sm"><i class="mdi mdi-delete"></i></a>
+                        {{-- </form> --}}
                     </center>
                 </div>
                 <div>
@@ -147,7 +153,7 @@ Packages Edit
             </div>
         </div>
         @endforeach
-    </div>
+         </div>
         </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -160,20 +166,20 @@ Packages Edit
 
 <script>
 
-var previewImage = function(event) {
-    var output = document.getElementById('poster_preview');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
-    }
-  };
+    var previewImage = function(event) {
+        var output = document.getElementById('poster_preview');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+        }
+    };
 
-const rupiah = (number)=>{
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR"
-    }).format(number);
-  }
+    const rupiah = (number)=>{
+        return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+        }).format(number);
+    }
 
     var x = document.getElementById("normal_price").value;
     var y = document.getElementById("end_price").value;

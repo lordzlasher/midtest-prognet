@@ -103,7 +103,33 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'normal_price' => 'required|numeric',
+            'end_price' => 'required|numeric',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if($request->file('photo')) {
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['photo'] = $request->file('photo')->store('photo');
+        }
+
+        Packages::where('id',$id)->update($validatedData);
+
+        if($request->products){
+        foreach ($request->products as $product) {
+            DetailPackages::create([
+                'packages_id' => $id,
+                'id_product' => $product,
+                'quantity' => $request->quantity
+            ]);
+            }
+         }
+     
+        return redirect('/package')->with('success','Data package berhasil diupdate.');
     }
 
     /**
@@ -114,13 +140,23 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $detailpackages = DB::table('detail_packages')->where('packages_id', $id);
+        $detailpackages->delete();
+        
+        $package = Packages::find($id);
+
+        if($package->photo){
+            Storage::delete($package->photo);
+        }
+
+        $package->delete();
+        
+        return redirect()->back()->with('success','Data packages telah dihapus');
     }
 
     public function destroyProducts($id)
     {
-        $product = DetailPackages::find($id,'packages_id');
-
+        $product = DetailPackages::find($id);
         $product->delete();
         return redirect()->back()->with('success','Data product pada packages telah dihapus');
     }
